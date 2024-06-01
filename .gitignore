@@ -3,3 +3,5 @@
 .ipynb_checkpoints/
 *pyc
 .idea/
+CUB/dataset
+*.tgz
