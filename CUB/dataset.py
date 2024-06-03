@@ -35,6 +35,7 @@ class CUBDataset(Dataset):
             assert any([("test" in path) or ("val" in path) for path in pkl_file_paths])
         for file_path in pkl_file_paths:
             self.data.extend(pickle.load(open(file_path, 'rb')))
+        assert all(len(example['attribute_label']) == 112 for example in self.data)
         self.transform = transform
         self.use_attr = use_attr
         self.no_img = no_img

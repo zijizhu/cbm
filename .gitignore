@@ -5,3 +5,5 @@
 .idea/
 CUB/dataset
 *.tgz
+*.pth
+*.txt

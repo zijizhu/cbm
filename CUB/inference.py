@@ -1,6 +1,7 @@
 """
 Evaluate trained models on the official CUB test set
 """
+from tqdm import tqdm
 import os
 import sys
 import torch
@@ -29,7 +30,8 @@ def eval(args):
     wrong_idx: image ids where the model got the wrong class prediction (to compare with other models)
     """
     if args.model_dir:
-        model = torch.load(args.model_dir)
+        device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+        model = torch.load(args.model_dir, map_location=device)
     else:
         model = None
 
@@ -86,7 +88,7 @@ def eval(args):
     all_class_labels, all_class_outputs, all_class_logits = [], [], []
     topk_class_labels, topk_class_outputs = [], []
 
-    for data_idx, data in enumerate(loader):
+    for data_idx, data in enumerate(tqdm(loader)):
         if args.use_attr:
             if args.no_img:  # A -> Y
                 inputs, labels = data
