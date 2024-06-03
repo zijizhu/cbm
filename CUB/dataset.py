@@ -63,7 +63,7 @@ class CUBDataset(Dataset):
         #     split = 'train' if self.is_train else 'test'
         #     img_path = '/'.join(img_path_split[:2] + [split] + img_path_split[2:])
         #     img = Image.open(img_path).convert('RGB')
-        img_path = os.path.join(os.path.dirname(__file__), 'dataset', 'CUB_200_2011', img_path.split('CUB_200_2011', 1)[1])
+        img_path = os.path.join(os.path.dirname(__file__), 'dataset', 'CUB_200_2011', img_path.split('CUB_200_2011/', 1)[1])
         img = Image.open(img_path).convert('RGB')
 
         class_label = img_data['class_label']
