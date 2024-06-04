@@ -102,8 +102,8 @@ def eval(args):
         else:  # simple finetune
             inputs, labels = data
 
-        inputs_var = torch.autograd.Variable(inputs).cuda()
-        labels_var = torch.autograd.Variable(labels).cuda()
+        inputs_var = torch.autograd.Variable(inputs)
+        labels_var = torch.autograd.Variable(labels)
 
         if args.attribute_group:
             outputs = []
@@ -132,7 +132,7 @@ def eval(args):
                         class_outputs = model2(stage2_inputs)
                     else:  # for debugging bottleneck performance without running stage 2
                         class_outputs = torch.zeros([inputs.size(0), N_CLASSES],
-                                                    dtype=torch.float64).cuda()  # ignore this
+                                                    dtype=torch.float64)  # ignore this
                 else:  # cotraining, end2end
                     if args.use_relu:
                         attr_outputs = [torch.nn.ReLU()(o) for o in outputs[1:]]
